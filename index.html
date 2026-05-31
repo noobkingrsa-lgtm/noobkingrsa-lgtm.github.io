@@ -126,18 +126,18 @@ const Q={
 const labels={trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
 
 const SERVERS=[
-  {name:'VidLink Pro',url:(id,ep,lang)=>`https://vidlink.pro/embed/anime/${id}/${ep}?${lang==='dub'?'dub=true':''}`},
-  {name:'VidSrc 1',url:(id,ep,lang)=>`https://vidsrc.me/embed/tv?imdb=${id}&season=1&episode=${ep}`},
-  {name:'VidSrc 2',url:(id,ep,lang)=>`https://vidsrc.pro/embed/tv?imdb=${id}&season=1&episode=${ep}`},
-  {name:'VidSrc RU',url:(id,ep,lang)=>`https://vsembed.ru/embed/tv?imdb=${id}&season=1&episode=${ep}`},
-  {name:'VidSrc SU',url:(id,ep,lang)=>`https://vsembed.su/embed/tv?imdb=${id}&season=1&episode=${ep}`},
-  {name:'AutoEmbed',url:(id,ep,lang)=>`https://autoembed.to/embed/tv?imdb=${id}&season=1&episode=${ep}`},
-  {name:'Embed Su',url:(id,ep,lang)=>`https://embed.su/embed/tv/${id}/${ep}`},
-  {name:'StreamWish',url:(id,ep,lang)=>`https://streamwish.to/e/${id}`},
-  {name:'Rapid Cloud',url:(id,ep,lang)=>`https://rapid.to/watch?v=${id}`},
-  {name:'Filemoon',url:(id,ep,lang)=>`https://filemoon.sx/e/${id}`},
-  {name:'Hstream',url:(id,ep,lang)=>`https://hstream.to/e/${id}`},
-  {name:'MixDrop',url:(id,ep,lang)=>`https://mixdrop.to/e/${id}`},
+  {name:'VidLink Pro',url:(id,ep,lang)=>`https://vidlink.pro/embed/anime/${id}/${ep}`},
+  {name:'VidSrc ME',url:(id,ep,lang)=>`https://vidsrc.me/embed/anime/${id}/${ep}`},
+  {name:'Anilist.co',url:(id,ep,lang)=>`https://embed.anilist.co/anime/${id}/${ep}`},
+  {name:'Anix',url:(id,ep,lang)=>`https://anix.to/embed?id=${id}&ep=${ep}`},
+  {name:'Hianime',url:(id,ep,lang)=>`https://hianime.to/embed?id=${id}&ep=${ep}`},
+  {name:'StreamSB',url:(id,ep,lang)=>`https://streamsb.net/embed/${id}/${ep}`},
+  {name:'Sflix',url:(id,ep,lang)=>`https://sflix.to/embed/anime/${id}/${ep}`},
+  {name:'9Anime',url:(id,ep,lang)=>`https://9anime.to/embed?id=${id}&ep=${ep}`},
+  {name:'AnimeFlix',url:(id,ep,lang)=>`https://animeflix.io/embed/${id}/${ep}`},
+  {name:'GoGoAnime',url:(id,ep,lang)=>`https://gogoanime.run/embed?id=${id}&ep=${ep}`},
+  {name:'Gogo CDN',url:(id,ep,lang)=>`https://gogocdn.net/embedplayer?id=${id}&ep=${ep}`},
+  {name:'Zoro',url:(id,ep,lang)=>`https://zoro.to/embed?id=${id}&ep=${ep}`},
 ];
 
 async function gql(query,variables){
@@ -221,7 +221,7 @@ async function openAnime(id){
 
 function buildUrl(ep,lang,server){
   if(!cur)return null;
-  const id=cur.idMal||cur.id;
+  const id=cur.id;
   return SERVERS[server].url(id,ep,lang);
 }
 
