@@ -10,78 +10,66 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--accent:#e85d04;--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#222;--text:#fff;--muted:#888}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
 header{background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:100}
 .logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--accent);letter-spacing:-1px;white-space:nowrap}
 .search-wrap{display:flex;gap:8px;flex:1;max-width:440px}
 .search-wrap input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 16px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
 .search-wrap input::placeholder{color:var(--muted)}
 .search-wrap input:focus{border-color:var(--accent)}
-.search-wrap button{background:var(--accent);border:none;border-radius:10px;padding:9px 20px;color:#fff;cursor:pointer;font-size:14px;font-family:'Inter',sans-serif;font-weight:500;white-space:nowrap}
+.search-wrap button{background:var(--accent);border:none;border-radius:10px;padding:9px 20px;color:#fff;cursor:pointer;font-size:14px;font-family:'Inter',sans-serif;font-weight:500}
 .search-wrap button:hover{background:#cf4f00}
 .tabs{display:flex;gap:6px;margin-left:auto}
 .tab{background:transparent;border:1px solid var(--border);border-radius:8px;padding:7px 16px;color:var(--muted);cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;transition:all 0.2s}
 .tab:hover{border-color:#444;color:#fff}
 .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
-
 main{padding:32px}
-.section-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:20px;color:#fff}
+.section-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;margin-bottom:40px}
-
-.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s;position:relative}
+.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card-img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:var(--bg3)}
 .card-score{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.8);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:500;color:#ffd700}
+.card-wrap{position:relative}
 .card-info{padding:10px 12px}
-.card-title{font-size:13px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+.card-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-sub{font-size:11px;color:var(--muted);margin-top:4px}
-
-.loading{text-align:center;padding:80px 20px;color:var(--muted);font-size:14px}
+.loading{text-align:center;padding:80px;color:var(--muted);font-size:14px}
 .loading::after{content:'';display:block;width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:16px auto 0;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error-msg{text-align:center;padding:60px;color:var(--accent);font-size:14px}
-
 .player-page{display:none}
 .back-btn{background:transparent;border:1px solid var(--border);border-radius:8px;padding:8px 18px;color:var(--muted);cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;margin-bottom:24px;transition:all 0.2s}
 .back-btn:hover{border-color:var(--accent);color:var(--accent)}
-
 .player-layout{display:grid;grid-template-columns:1fr 280px;gap:28px}
-@media(max-width:768px){.player-layout{grid-template-columns:1fr}.sidebar{order:-1}}
-
+@media(max-width:768px){.player-layout{grid-template-columns:1fr}}
 .player-wrap{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9;position:relative}
 .player-wrap iframe{width:100%;height:100%;border:none;display:block}
 .no-ep{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px;gap:12px}
-.no-ep-icon{font-size:48px;opacity:0.3}
-
 .ep-section{margin-top:20px}
 .ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
 .ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto;padding-right:4px}
-.ep-grid::-webkit-scrollbar{width:4px}
-.ep-grid::-webkit-scrollbar-track{background:var(--bg3);border-radius:2px}
-.ep-grid::-webkit-scrollbar-thumb{background:#444;border-radius:2px}
 .ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
 .ep-btn:hover{border-color:#555;color:#fff}
 .ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
-
-.sidebar{}
+.server-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.server-label{font-size:12px;color:var(--muted)}
+.server-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
+.server-btn:hover{border-color:#555;color:#fff}
+.server-btn.active{border-color:var(--accent);color:var(--accent)}
 .sidebar-cover{width:100%;border-radius:12px;aspect-ratio:2/3;object-fit:cover;display:block;margin-bottom:16px}
 .anime-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.3;margin-bottom:6px}
 .anime-score{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:500}
 .anime-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;max-height:130px;overflow:hidden}
 .genres{display:flex;flex-wrap:wrap;gap:6px}
 .genre-tag{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--muted)}
-
-.server-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.server-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif}
-.server-btn.active{border-color:var(--accent);color:var(--accent)}
+.no-id-warn{background:#1a1200;border:1px solid #3a2800;border-radius:8px;padding:10px 14px;font-size:12px;color:#f5a623;margin-top:12px;line-height:1.5}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">ZerStreams</div>
   <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Search anime..." />
+    <input type="text" id="searchInput" placeholder="Search anime..."/>
     <button onclick="doSearch()">Search</button>
   </div>
   <div class="tabs">
@@ -90,193 +78,194 @@ main{padding:32px}
     <button class="tab" onclick="loadTab('upcoming',this)">Upcoming</button>
   </div>
 </header>
-
 <main>
   <div id="homePage">
     <div class="section-title" id="sectionLabel">Trending Now</div>
     <div class="grid" id="animeGrid"><div class="loading"></div></div>
   </div>
-
   <div class="player-page" id="playerPage">
     <button class="back-btn" onclick="goHome()">← Back to Browse</button>
     <div class="player-layout">
       <div>
         <div class="player-wrap" id="playerWrap">
-          <div class="no-ep">
-            <div class="no-ep-icon">▶</div>
-            <span>Select an episode to start watching</span>
-          </div>
+          <div class="no-ep">▶ Select an episode to start watching</div>
         </div>
         <div class="server-row" id="serverRow" style="display:none">
-          <span style="font-size:12px;color:var(--muted);align-self:center">Servers:</span>
-          <button class="server-btn active" onclick="switchServer(0,this)">Server 1</button>
-          <button class="server-btn" onclick="switchServer(1,this)">Server 2</button>
-          <button class="server-btn" onclick="switchServer(2,this)">Server 3</button>
+          <span class="server-label">Servers:</span>
+          <button class="server-btn active" onclick="switchServer(0,this)">VidSrc 1</button>
+          <button class="server-btn" onclick="switchServer(1,this)">VidSrc 2</button>
+          <button class="server-btn" onclick="switchServer(2,this)">VidSrc 3</button>
+          <button class="server-btn" onclick="switchServer(3,this)">VidSrc 4</button>
         </div>
         <div class="ep-section">
           <div class="ep-label">Episodes</div>
           <div class="ep-grid" id="epGrid"></div>
         </div>
       </div>
-      <div class="sidebar" id="animeSidebar">
-        <div class="loading"></div>
-      </div>
+      <div id="animeSidebar"><div class="loading"></div></div>
     </div>
   </div>
 </main>
-
 <script>
-const GQL = 'https://graphql.anilist.co';
-let currentAnime = null;
-let currentEp = 1;
-let currentServer = 0;
+const GQL='https://graphql.anilist.co';
+let cur=null,curEp=1,curServer=0;
 
-const SERVERS = [
-  (id, ep) => `https://vidsrcme.ru/embed/tv/anilist:${id}/${ep}`,
-  (id, ep) => `https://vidsrcme.ru/embed/tv?anilist=${id}&season=1&episode=${ep}`,
-  (id, ep) => `https://vidsrc.me/embed/tv/anilist:${id}/${ep}`,
-  (id, ep) => `https://vidsrc.xyz/embed/tv/anilist:${id}/${ep}`,
-  (id, ep) => `https://vidsrc.to/embed/tv/anilist:${id}/${ep}`
+const SERVERS=[
+  (imdb,ep)=>imdb?`https://vsembed.ru/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
+  (imdb,ep)=>imdb?`https://vsembed.su/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
+  (imdb,ep)=>imdb?`https://vsembed.ru/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
+  (imdb,ep)=>imdb?`https://vsembed.su/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
 ];
 
-async function gql(query, variables) {
-  const r = await fetch(GQL, {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({query, variables})
-  });
-  const j = await r.json();
-  return j.data;
+async function gql(query,variables){
+  const r=await fetch(GQL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})});
+  return (await r.json()).data;
 }
 
-const Q = {
-  trending: `query{Page(perPage:24){media(sort:TRENDING_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  popular:  `query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  upcoming: `query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,status:NOT_YET_RELEASED,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  search:   `query($s:String){Page(perPage:24){media(search:$s,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  detail:   `query($id:Int){Media(id:$id,type:ANIME){id title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false)}}`
+const Q={
+  trending:`query{Page(perPage:24){media(sort:TRENDING_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
+  popular:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
+  upcoming:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,status:NOT_YET_RELEASED,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
+  search:`query($s:String){Page(perPage:24){media(search:$s,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
+  detail:`query($id:Int){Media(id:$id,type:ANIME){id title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false) idMal externalLinks{site url}}}`
 };
 
-const labels = {trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
+const labels={trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
 
-async function loadTab(type, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+async function loadTab(type,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('sectionLabel').textContent = labels[type];
-  renderGrid(Q[type], {});
+  document.getElementById('sectionLabel').textContent=labels[type];
+  renderGrid(Q[type],{});
 }
 
-async function doSearch() {
-  const s = document.getElementById('searchInput').value.trim();
-  if (!s) return;
-  document.getElementById('sectionLabel').textContent = `Results for "${s}"`;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  renderGrid(Q.search, {s});
+async function doSearch(){
+  const s=document.getElementById('searchInput').value.trim();
+  if(!s)return;
+  document.getElementById('sectionLabel').textContent=`Results for "${s}"`;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  renderGrid(Q.search,{s});
 }
 
-document.getElementById('searchInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
-});
+document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
 
-async function renderGrid(q, vars) {
-  const grid = document.getElementById('animeGrid');
-  grid.innerHTML = '<div class="loading"></div>';
-  try {
-    const data = await gql(q, vars);
-    const list = data.Page.media;
-    grid.innerHTML = '';
-    list.forEach(a => {
-      const div = document.createElement('div');
-      div.className = 'card';
-      const score = a.averageScore ? `<div class="card-score">★ ${(a.averageScore/10).toFixed(1)}</div>` : '';
-      const eps = a.episodes ? `${a.episodes} eps` : a.status || '';
-      div.innerHTML = `
-        <img class="card-img" src="${a.coverImage.large}" loading="lazy" alt="${a.title.romaji}"/>
-        ${score}
-        <div class="card-info">
-          <div class="card-title">${a.title.romaji}</div>
-          <div class="card-sub">${eps}</div>
-        </div>`;
-      div.onclick = () => openAnime(a.id);
+async function renderGrid(q,vars){
+  const grid=document.getElementById('animeGrid');
+  grid.innerHTML='<div class="loading"></div>';
+  try{
+    const data=await gql(q,vars);
+    const list=data.Page.media;
+    grid.innerHTML='';
+    list.forEach(a=>{
+      const div=document.createElement('div');
+      div.className='card';
+      const score=a.averageScore?`<div class="card-score">★ ${(a.averageScore/10).toFixed(1)}</div>`:'';
+      div.innerHTML=`<div class="card-wrap"><img class="card-img" src="${a.coverImage.large}" loading="lazy"/>${score}</div><div class="card-info"><div class="card-title">${a.title.romaji}</div><div class="card-sub">${a.episodes?a.episodes+' eps':a.status||''}</div></div>`;
+      div.onclick=()=>openAnime(a.id);
       grid.appendChild(div);
     });
-  } catch(e) {
-    grid.innerHTML = '<div class="error-msg">Failed to load. Check your connection.</div>';
+  }catch(e){
+    grid.innerHTML='<div class="error-msg">Failed to load. Check connection.</div>';
   }
 }
 
-async function openAnime(id) {
-  document.getElementById('homePage').style.display = 'none';
-  document.getElementById('playerPage').style.display = 'block';
-  document.getElementById('playerWrap').innerHTML = '<div class="no-ep"><div class="no-ep-icon">▶</div><span>Select an episode</span></div>';
-  document.getElementById('epGrid').innerHTML = '';
-  document.getElementById('serverRow').style.display = 'none';
-  document.getElementById('animeSidebar').innerHTML = '<div class="loading"></div>';
-
-  try {
-    const data = await gql(Q.detail, {id});
-    const a = data.Media;
-    currentAnime = a;
-    currentServer = 0;
-
-    const desc = a.description ? a.description.replace(/<[^>]*>/g,'').slice(0,280) + '…' : 'No description available.';
-    const genres = (a.genres||[]).slice(0,6).map(g=>`<span class="genre-tag">${g}</span>`).join('');
-    const score = a.averageScore ? `★ ${(a.averageScore/10).toFixed(1)}/10 · ` : '';
-
-    document.getElementById('animeSidebar').innerHTML = `
-      <img class="sidebar-cover" src="${a.coverImage.extraLarge||a.coverImage.large}" alt="${a.title.romaji}"/>
+async function openAnime(id){
+  document.getElementById('homePage').style.display='none';
+  document.getElementById('playerPage').style.display='block';
+  document.getElementById('playerWrap').innerHTML='<div class="no-ep">▶ Select an episode</div>';
+  document.getElementById('epGrid').innerHTML='';
+  document.getElementById('serverRow').style.display='none';
+  document.getElementById('animeSidebar').innerHTML='<div class="loading"></div>';
+  try{
+    const data=await gql(Q.detail,{id});
+    const a=data.Media;
+    cur=a;
+    curServer=0;
+    const imdbLink=a.externalLinks?a.externalLinks.find(l=>l.site==='MyAnimeList'):null;
+    cur.imdbId=null;
+    if(a.idMal){
+      cur.malId=a.idMal;
+    }
+    const desc=a.description?a.description.replace(/<[^>]*>/g,'').slice(0,280)+'…':'No description.';
+    const genres=(a.genres||[]).slice(0,6).map(g=>`<span class="genre-tag">${g}</span>`).join('');
+    const score=a.averageScore?`★ ${(a.averageScore/10).toFixed(1)}/10 · `:'';
+    const hasImdb=cur.imdbId;
+    const warn=!hasImdb?`<div class="no-id-warn">⚠ No IMDB ID found for this anime. Try a popular/dubbed series for best results.</div>`:'';
+    document.getElementById('animeSidebar').innerHTML=`
+      <img class="sidebar-cover" src="${a.coverImage.extraLarge||a.coverImage.large}"/>
       <div class="anime-title">${a.title.english||a.title.romaji}</div>
       <div class="anime-score">${score}${a.status||''}</div>
       <div class="anime-desc">${desc}</div>
-      <div class="genres">${genres}</div>`;
-
-    const eps = a.episodes || 1;
-    const epGrid = document.getElementById('epGrid');
-    for (let i = 1; i <= Math.min(eps, 300); i++) {
-      const btn = document.createElement('button');
-      btn.className = 'ep-btn';
-      btn.textContent = i;
-      btn.onclick = () => playEp(i, btn);
+      <div class="genres">${genres}</div>
+      ${warn}`;
+    const eps=a.episodes||1;
+    const epGrid=document.getElementById('epGrid');
+    for(let i=1;i<=Math.min(eps,300);i++){
+      const btn=document.createElement('button');
+      btn.className='ep-btn';
+      btn.textContent=i;
+      btn.onclick=()=>playEp(i,btn);
       epGrid.appendChild(btn);
     }
-  } catch(e) {
-    document.getElementById('animeSidebar').innerHTML = '<div class="error-msg">Failed to load details.</div>';
+  }catch(e){
+    document.getElementById('animeSidebar').innerHTML='<div class="error-msg">Failed to load.</div>';
   }
 }
 
-function playEp(ep, btn) {
-  document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
+async function getImdbId(malId){
+  try{
+    const r=await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
+    const d=await r.json();
+    return d.data?.external?.find(e=>e.name==='AniDB')?.url||null;
+  }catch{return null;}
+}
+
+function buildUrl(ep){
+  const imdb=cur.imdbId;
+  if(imdb){
+    return SERVERS[curServer](imdb,ep);
+  }
+  const malId=cur.malId||cur.id;
+  const fallbacks=[
+    `https://vsembed.ru/embed/tv/anilist:${cur.id}/${ep}`,
+    `https://vsembed.su/embed/tv/anilist:${cur.id}/${ep}`,
+    `https://vsembed.ru/embed/tv/anilist:${cur.id}/${ep}`,
+    `https://vsembed.su/embed/tv/anilist:${cur.id}/${ep}`,
+  ];
+  return fallbacks[curServer]||fallbacks[0];
+}
+
+function playEp(ep,btn){
+  document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  currentEp = ep;
+  curEp=ep;
   loadPlayer();
-  document.getElementById('serverRow').style.display = 'flex';
+  document.getElementById('serverRow').style.display='flex';
 }
 
-function loadPlayer() {
-  const url = SERVERS[currentServer](currentAnime.id, currentEp);
-  document.getElementById('playerWrap').innerHTML = `
-    <iframe src="${url}"
-      allowfullscreen
-      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-      referrerpolicy="origin"
-      scrolling="no">
-    </iframe>`;
+function loadPlayer(){
+  const url=buildUrl(curEp);
+  if(!url){
+    document.getElementById('playerWrap').innerHTML='<div class="no-ep">No stream available. Try another server.</div>';
+    return;
+  }
+  document.getElementById('playerWrap').innerHTML=`<iframe src="${url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin" scrolling="no"></iframe>`;
 }
 
-function switchServer(idx, btn) {
-  document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+function switchServer(idx,btn){
+  document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  currentServer = idx;
-  if (currentAnime && currentEp) loadPlayer();
+  curServer=idx;
+  if(cur&&curEp)loadPlayer();
 }
 
-function goHome() {
-  document.getElementById('playerPage').style.display = 'none';
-  document.getElementById('homePage').style.display = 'block';
-  window.scrollTo(0, 0);
+function goHome(){
+  document.getElementById('playerPage').style.display='none';
+  document.getElementById('homePage').style.display='block';
+  window.scrollTo(0,0);
 }
 
-renderGrid(Q.trending, {});
+renderGrid(Q.trending,{});
 </script>
 </body>
 </html>
