@@ -132,11 +132,11 @@ let currentEp = 1;
 let currentServer = 0;
 
 const SERVERS = [
+  (id, ep) => `https://vidsrcme.ru/embed/tv/anilist:${id}/${ep}`,
+  (id, ep) => `https://vidsrcme.ru/embed/tv?anilist=${id}&season=1&episode=${ep}`,
   (id, ep) => `https://vidsrc.me/embed/tv/anilist:${id}/${ep}`,
-  (id, ep) => `https://vidsrc.to/embed/tv/anilist:${id}/${ep}`,
-  (id, ep) => `https://embed.su/embed/tv/${id}/${ep}`,
-  (id, ep) => `https://multiembed.mov/?video_id=${id}&tmdb=1&s=1&e=${ep}`,
-  (id, ep) => `https://vidsrc.xyz/embed/tv/anilist:${id}/${ep}`
+  (id, ep) => `https://vidsrc.xyz/embed/tv/anilist:${id}/${ep}`,
+  (id, ep) => `https://vidsrc.to/embed/tv/anilist:${id}/${ep}`
 ];
 
 async function gql(query, variables) {
