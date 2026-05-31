@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--accent:#e85d04;--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#222;--text:#fff;--muted:#888}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+:root{--accent:#e85d04;--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#222;--muted:#888}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;min-height:100vh}
 header{background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:100}
 .logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--accent);letter-spacing:-1px;white-space:nowrap}
 .search-wrap{display:flex;gap:8px;flex:1;max-width:440px}
@@ -25,11 +25,10 @@ header{background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1
 main{padding:32px}
 .section-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;margin-bottom:40px}
-.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s}
+.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s;position:relative}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card-img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:var(--bg3)}
-.card-score{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.8);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:500;color:#ffd700}
-.card-wrap{position:relative}
+.card-score{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.85);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:500;color:#ffd700}
 .card-info{padding:10px 12px}
 .card-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-sub{font-size:11px;color:var(--muted);margin-top:4px}
@@ -42,27 +41,27 @@ main{padding:32px}
 .back-btn:hover{border-color:var(--accent);color:var(--accent)}
 .player-layout{display:grid;grid-template-columns:1fr 280px;gap:28px}
 @media(max-width:768px){.player-layout{grid-template-columns:1fr}}
-.player-wrap{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9;position:relative}
+.player-wrap{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9}
 .player-wrap iframe{width:100%;height:100%;border:none;display:block}
-.no-ep{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px;gap:12px}
-.ep-section{margin-top:20px}
-.ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
-.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto;padding-right:4px}
-.ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
-.ep-btn:hover{border-color:#555;color:#fff}
-.ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+.no-ep{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px}
 .server-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
 .server-label{font-size:12px;color:var(--muted)}
 .server-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
 .server-btn:hover{border-color:#555;color:#fff}
 .server-btn.active{border-color:var(--accent);color:var(--accent)}
+.ep-section{margin-top:20px}
+.ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto}
+.ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
+.ep-btn:hover{border-color:#555;color:#fff}
+.ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
 .sidebar-cover{width:100%;border-radius:12px;aspect-ratio:2/3;object-fit:cover;display:block;margin-bottom:16px}
 .anime-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.3;margin-bottom:6px}
 .anime-score{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:500}
 .anime-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;max-height:130px;overflow:hidden}
 .genres{display:flex;flex-wrap:wrap;gap:6px}
 .genre-tag{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--muted)}
-.no-id-warn{background:#1a1200;border:1px solid #3a2800;border-radius:8px;padding:10px 14px;font-size:12px;color:#f5a623;margin-top:12px;line-height:1.5}
+.id-badge{margin-top:12px;font-size:11px;color:var(--muted);background:var(--bg3);border-radius:6px;padding:6px 10px}
 </style>
 </head>
 <body>
@@ -88,14 +87,14 @@ main{padding:32px}
     <div class="player-layout">
       <div>
         <div class="player-wrap" id="playerWrap">
-          <div class="no-ep">▶ Select an episode to start watching</div>
+          <div class="no-ep">Select an episode to start watching</div>
         </div>
         <div class="server-row" id="serverRow" style="display:none">
           <span class="server-label">Servers:</span>
-          <button class="server-btn active" onclick="switchServer(0,this)">VidSrc 1</button>
-          <button class="server-btn" onclick="switchServer(1,this)">VidSrc 2</button>
-          <button class="server-btn" onclick="switchServer(2,this)">VidSrc 3</button>
-          <button class="server-btn" onclick="switchServer(3,this)">VidSrc 4</button>
+          <button class="server-btn active" onclick="switchServer(0,this)">Server 1</button>
+          <button class="server-btn" onclick="switchServer(1,this)">Server 2</button>
+          <button class="server-btn" onclick="switchServer(2,this)">Server 3</button>
+          <button class="server-btn" onclick="switchServer(3,this)">Server 4</button>
         </div>
         <div class="ep-section">
           <div class="ep-label">Episodes</div>
@@ -110,13 +109,6 @@ main{padding:32px}
 const GQL='https://graphql.anilist.co';
 let cur=null,curEp=1,curServer=0;
 
-const SERVERS=[
-  (imdb,ep)=>imdb?`https://vsembed.ru/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
-  (imdb,ep)=>imdb?`https://vsembed.su/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
-  (imdb,ep)=>imdb?`https://vsembed.ru/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
-  (imdb,ep)=>imdb?`https://vsembed.su/embed/tv?imdb=${imdb}&season=1&episode=${ep}`:null,
-];
-
 async function gql(query,variables){
   const r=await fetch(GQL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})});
   return (await r.json()).data;
@@ -127,7 +119,7 @@ const Q={
   popular:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
   upcoming:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,status:NOT_YET_RELEASED,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
   search:`query($s:String){Page(perPage:24){media(search:$s,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  detail:`query($id:Int){Media(id:$id,type:ANIME){id title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false) idMal externalLinks{site url}}}`
+  detail:`query($id:Int){Media(id:$id,type:ANIME){id idMal title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false) externalLinks{site url}}}`
 };
 
 const labels={trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
@@ -154,13 +146,12 @@ async function renderGrid(q,vars){
   grid.innerHTML='<div class="loading"></div>';
   try{
     const data=await gql(q,vars);
-    const list=data.Page.media;
     grid.innerHTML='';
-    list.forEach(a=>{
+    data.Page.media.forEach(a=>{
       const div=document.createElement('div');
       div.className='card';
       const score=a.averageScore?`<div class="card-score">★ ${(a.averageScore/10).toFixed(1)}</div>`:'';
-      div.innerHTML=`<div class="card-wrap"><img class="card-img" src="${a.coverImage.large}" loading="lazy"/>${score}</div><div class="card-info"><div class="card-title">${a.title.romaji}</div><div class="card-sub">${a.episodes?a.episodes+' eps':a.status||''}</div></div>`;
+      div.innerHTML=`${score}<img class="card-img" src="${a.coverImage.large}" loading="lazy"/><div class="card-info"><div class="card-title">${a.title.romaji}</div><div class="card-sub">${a.episodes?a.episodes+' eps':a.status||''}</div></div>`;
       div.onclick=()=>openAnime(a.id);
       grid.appendChild(div);
     });
@@ -169,35 +160,56 @@ async function renderGrid(q,vars){
   }
 }
 
+async function getMalImdb(malId){
+  try{
+    const r=await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
+    const d=await r.json();
+    const ext=d.data?.external||[];
+    const imdb=ext.find(e=>e.url&&e.url.includes('imdb.com'));
+    if(imdb){
+      const m=imdb.url.match(/tt\d+/);
+      return m?m[0]:null;
+    }
+  }catch{}
+  return null;
+}
+
 async function openAnime(id){
   document.getElementById('homePage').style.display='none';
   document.getElementById('playerPage').style.display='block';
-  document.getElementById('playerWrap').innerHTML='<div class="no-ep">▶ Select an episode</div>';
+  document.getElementById('playerWrap').innerHTML='<div class="no-ep">Select an episode</div>';
   document.getElementById('epGrid').innerHTML='';
   document.getElementById('serverRow').style.display='none';
   document.getElementById('animeSidebar').innerHTML='<div class="loading"></div>';
+
   try{
     const data=await gql(Q.detail,{id});
     const a=data.Media;
-    cur=a;
+    cur={...a,imdbId:null};
     curServer=0;
-    const imdbLink=a.externalLinks?a.externalLinks.find(l=>l.site==='MyAnimeList'):null;
-    cur.imdbId=null;
+    curEp=1;
+
     if(a.idMal){
-      cur.malId=a.idMal;
+      const imdbId=await getMalImdb(a.idMal);
+      cur.imdbId=imdbId;
     }
+
     const desc=a.description?a.description.replace(/<[^>]*>/g,'').slice(0,280)+'…':'No description.';
     const genres=(a.genres||[]).slice(0,6).map(g=>`<span class="genre-tag">${g}</span>`).join('');
     const score=a.averageScore?`★ ${(a.averageScore/10).toFixed(1)}/10 · `:'';
-    const hasImdb=cur.imdbId;
-    const warn=!hasImdb?`<div class="no-id-warn">⚠ No IMDB ID found for this anime. Try a popular/dubbed series for best results.</div>`:'';
+    const idInfo=cur.imdbId
+      ?`<div class="id-badge">IMDB: ${cur.imdbId}</div>`
+      :a.idMal?`<div class="id-badge">MAL ID: ${a.idMal} · No IMDB found, using AniList ID</div>`
+      :`<div class="id-badge">Using AniList ID: ${id}</div>`;
+
     document.getElementById('animeSidebar').innerHTML=`
       <img class="sidebar-cover" src="${a.coverImage.extraLarge||a.coverImage.large}"/>
       <div class="anime-title">${a.title.english||a.title.romaji}</div>
       <div class="anime-score">${score}${a.status||''}</div>
       <div class="anime-desc">${desc}</div>
       <div class="genres">${genres}</div>
-      ${warn}`;
+      ${idInfo}`;
+
     const eps=a.episodes||1;
     const epGrid=document.getElementById('epGrid');
     for(let i=1;i<=Math.min(eps,300);i++){
@@ -212,27 +224,34 @@ async function openAnime(id){
   }
 }
 
-async function getImdbId(malId){
-  try{
-    const r=await fetch(`https://api.jikan.moe/v4/anime/${malId}`);
-    const d=await r.json();
-    return d.data?.external?.find(e=>e.name==='AniDB')?.url||null;
-  }catch{return null;}
-}
-
 function buildUrl(ep){
-  const imdb=cur.imdbId;
-  if(imdb){
-    return SERVERS[curServer](imdb,ep);
+  const base1='https://vidsrc-embed.ru/embed/tv';
+  const base2='https://vsembed.ru/embed/tv';
+  const base3='https://vsembed.su/embed/tv';
+  const base4='https://vidsrc-embed.su/embed/tv';
+
+  if(cur.imdbId){
+    const urls=[
+      `${base1}?imdb=${cur.imdbId}&season=1&episode=${ep}&autoplay=1`,
+      `${base2}?imdb=${cur.imdbId}&season=1&episode=${ep}&autoplay=1`,
+      `${base3}?imdb=${cur.imdbId}&season=1&episode=${ep}&autoplay=1`,
+      `${base4}?imdb=${cur.imdbId}&season=1&episode=${ep}&autoplay=1`,
+    ];
+    return urls[curServer]||urls[0];
   }
-  const malId=cur.malId||cur.id;
-  const fallbacks=[
-    `https://vsembed.ru/embed/tv/anilist:${cur.id}/${ep}`,
-    `https://vsembed.su/embed/tv/anilist:${cur.id}/${ep}`,
-    `https://vsembed.ru/embed/tv/anilist:${cur.id}/${ep}`,
-    `https://vsembed.su/embed/tv/anilist:${cur.id}/${ep}`,
-  ];
-  return fallbacks[curServer]||fallbacks[0];
+
+  const malId=cur.idMal;
+  if(malId){
+    const urls=[
+      `${base1}?tmdb=${malId}&season=1&episode=${ep}&autoplay=1`,
+      `${base2}?tmdb=${malId}&season=1&episode=${ep}&autoplay=1`,
+      `${base3}?tmdb=${malId}&season=1&episode=${ep}&autoplay=1`,
+      `${base4}?tmdb=${malId}&season=1&episode=${ep}&autoplay=1`,
+    ];
+    return urls[curServer]||urls[0];
+  }
+
+  return `${base1}?tmdb=${cur.id}&season=1&episode=${ep}&autoplay=1`;
 }
 
 function playEp(ep,btn){
@@ -245,11 +264,7 @@ function playEp(ep,btn){
 
 function loadPlayer(){
   const url=buildUrl(curEp);
-  if(!url){
-    document.getElementById('playerWrap').innerHTML='<div class="no-ep">No stream available. Try another server.</div>';
-    return;
-  }
-  document.getElementById('playerWrap').innerHTML=`<iframe src="${url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin" scrolling="no"></iframe>`;
+  document.getElementById('playerWrap').innerHTML=`<iframe src="${url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin"></iframe>`;
 }
 
 function switchServer(idx,btn){
