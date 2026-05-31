@@ -46,17 +46,18 @@ main{padding:32px}
 .player-wrap iframe{width:100%;height:100%;border:none;display:block}
 .player-wrap video{width:100%;height:100%;display:block}
 .no-ep{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px;gap:12px}
+.controls-section{margin-top:16px;padding:12px;background:var(--bg3);border-radius:8px}
+.control-label{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500}
+.control-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.control-btn{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.control-btn:hover{border-color:#555;color:#fff}
+.control-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
 .ep-section{margin-top:20px}
 .ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
 .ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto;padding-right:4px}
 .ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
 .ep-btn:hover{border-color:#555;color:#fff}
 .ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
-.server-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
-.server-label{font-size:12px;color:var(--muted)}
-.server-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
-.server-btn:hover{border-color:#555;color:#fff}
-.server-btn.active{border-color:var(--accent);color:var(--accent)}
 .sidebar-cover{width:100%;border-radius:12px;aspect-ratio:2/3;object-fit:cover;display:block;margin-bottom:16px}
 .anime-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.3;margin-bottom:6px}
 .anime-score{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:500}
@@ -90,14 +91,17 @@ main{padding:32px}
         <div class="player-wrap" id="playerWrap">
           <div class="no-ep">▶ Select an episode to start watching</div>
         </div>
-        <div class="server-row" id="serverRow" style="display:none">
-          <span class="server-label">Servers:</span>
-          <button class="server-btn active" onclick="switchServer(0,this)">VidSrc 1</button>
-          <button class="server-btn" onclick="switchServer(1,this)">VidSrc 2</button>
-          <button class="server-btn" onclick="switchServer(2,this)">VidSrc 3</button>
-          <button class="server-btn" onclick="switchServer(3,this)">Backup 1</button>
-          <button class="server-btn" onclick="switchServer(4,this)">Backup 2</button>
+        
+        <div class="controls-section" id="languageSection" style="display:none">
+          <div class="control-label">Language:</div>
+          <div class="control-buttons" id="languageContainer"></div>
         </div>
+        
+        <div class="controls-section" id="serverSection" style="display:none">
+          <div class="control-label">Servers:</div>
+          <div class="control-buttons" id="serverContainer"></div>
+        </div>
+        
         <div class="ep-section">
           <div class="ep-label">Episodes</div>
           <div class="ep-grid" id="epGrid"></div>
@@ -109,7 +113,7 @@ main{padding:32px}
 </main>
 <script>
 const GQL='https://graphql.anilist.co';
-let cur=null,curEp=1,curServer=0;
+let cur=null,curEp=1,curServer=0,curLang='sub';
 
 const Q={
   trending:`query{Page(perPage:24){media(sort:TRENDING_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
@@ -122,11 +126,18 @@ const Q={
 const labels={trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
 
 const SERVERS=[
-  (id,ep)=>`https://vidsrc.me/embed/tv?imdb=${id}&season=1&episode=${ep}`,
-  (id,ep)=>`https://vidsrc.pro/embed/tv?imdb=${id}&season=1&episode=${ep}`,
-  (id,ep)=>`https://vsembed.ru/embed/tv?imdb=${id}&season=1&episode=${ep}`,
-  (id,ep)=>`https://vsembed.su/embed/tv?imdb=${id}&season=1&episode=${ep}`,
-  (id,ep)=>`https://autoembed.to/embed/tv?imdb=${id}&season=1&episode=${ep}`,
+  {name:'VidLink Pro',url:(id,ep,lang)=>`https://vidlink.pro/embed/anime/${id}/${ep}?${lang==='dub'?'dub=true':''}`},
+  {name:'VidSrc 1',url:(id,ep,lang)=>`https://vidsrc.me/embed/tv?imdb=${id}&season=1&episode=${ep}`},
+  {name:'VidSrc 2',url:(id,ep,lang)=>`https://vidsrc.pro/embed/tv?imdb=${id}&season=1&episode=${ep}`},
+  {name:'VidSrc RU',url:(id,ep,lang)=>`https://vsembed.ru/embed/tv?imdb=${id}&season=1&episode=${ep}`},
+  {name:'VidSrc SU',url:(id,ep,lang)=>`https://vsembed.su/embed/tv?imdb=${id}&season=1&episode=${ep}`},
+  {name:'AutoEmbed',url:(id,ep,lang)=>`https://autoembed.to/embed/tv?imdb=${id}&season=1&episode=${ep}`},
+  {name:'Embed Su',url:(id,ep,lang)=>`https://embed.su/embed/tv/${id}/${ep}`},
+  {name:'StreamWish',url:(id,ep,lang)=>`https://streamwish.to/e/${id}`},
+  {name:'Rapid Cloud',url:(id,ep,lang)=>`https://rapid.to/watch?v=${id}`},
+  {name:'Filemoon',url:(id,ep,lang)=>`https://filemoon.sx/e/${id}`},
+  {name:'Hstream',url:(id,ep,lang)=>`https://hstream.to/e/${id}`},
+  {name:'MixDrop',url:(id,ep,lang)=>`https://mixdrop.to/e/${id}`},
 ];
 
 async function gql(query,variables){
@@ -176,13 +187,15 @@ async function openAnime(id){
   document.getElementById('playerPage').style.display='block';
   document.getElementById('playerWrap').innerHTML='<div class="no-ep">▶ Select an episode</div>';
   document.getElementById('epGrid').innerHTML='';
-  document.getElementById('serverRow').style.display='none';
+  document.getElementById('serverSection').style.display='none';
+  document.getElementById('languageSection').style.display='none';
   document.getElementById('animeSidebar').innerHTML='<div class="loading"></div>';
   try{
     const data=await gql(Q.detail,{id});
     const a=data.Media;
     cur=a;
     curServer=0;
+    curLang='sub';
     const desc=a.description?a.description.replace(/<[^>]*>/g,'').slice(0,280)+'…':'No description.';
     const genres=(a.genres||[]).slice(0,6).map(g=>`<span class="genre-tag">${g}</span>`).join('');
     const score=a.averageScore?`★ ${(a.averageScore/10).toFixed(1)}/10 · `:'';
@@ -206,34 +219,64 @@ async function openAnime(id){
   }
 }
 
-function buildUrl(ep){
+function buildUrl(ep,lang,server){
   if(!cur)return null;
-  const imdbId=cur.idMal||cur.id;
-  return SERVERS[curServer](imdbId,ep);
+  const id=cur.idMal||cur.id;
+  return SERVERS[server].url(id,ep,lang);
+}
+
+function renderLanguageButtons(){
+  const container=document.getElementById('languageContainer');
+  container.innerHTML='';
+  ['sub','dub'].forEach(lang=>{
+    const btn=document.createElement('button');
+    btn.className='control-btn';
+    if(lang===curLang)btn.classList.add('active');
+    btn.textContent=lang.toUpperCase();
+    btn.onclick=()=>{
+      curLang=lang;
+      renderLanguageButtons();
+      loadPlayer();
+    };
+    container.appendChild(btn);
+  });
+}
+
+function renderServerButtons(){
+  const container=document.getElementById('serverContainer');
+  container.innerHTML='';
+  SERVERS.forEach((server,idx)=>{
+    const btn=document.createElement('button');
+    btn.className='control-btn';
+    if(idx===curServer)btn.classList.add('active');
+    btn.textContent=server.name;
+    btn.onclick=()=>{
+      curServer=idx;
+      renderServerButtons();
+      loadPlayer();
+    };
+    container.appendChild(btn);
+  });
 }
 
 function playEp(ep,btn){
   document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   curEp=ep;
+  renderLanguageButtons();
+  renderServerButtons();
+  document.getElementById('languageSection').style.display='block';
+  document.getElementById('serverSection').style.display='block';
   loadPlayer();
-  document.getElementById('serverRow').style.display='flex';
 }
 
 function loadPlayer(){
-  const url=buildUrl(curEp);
+  const url=buildUrl(curEp,curLang,curServer);
   if(!url){
     document.getElementById('playerWrap').innerHTML='<div class="no-ep">Error building stream URL.</div>';
     return;
   }
   document.getElementById('playerWrap').innerHTML=`<iframe src="${url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="no-referrer" scrolling="no"></iframe>`;
-}
-
-function switchServer(idx,btn){
-  document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  curServer=idx;
-  if(cur&&curEp)loadPlayer();
 }
 
 function goHome(){
