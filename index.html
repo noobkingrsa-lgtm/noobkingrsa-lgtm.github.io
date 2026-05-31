@@ -8,15 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--accent:#e85d04;--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#222;--muted:#888}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;min-height:100vh}
+:root{--accent:#e85d04;--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#222;--text:#fff;--muted:#888}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 header{background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:100}
 .logo{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--accent);letter-spacing:-1px;white-space:nowrap}
 .search-wrap{display:flex;gap:8px;flex:1;max-width:440px}
 .search-wrap input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:9px 16px;color:#fff;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
 .search-wrap input::placeholder{color:var(--muted)}
 .search-wrap input:focus{border-color:var(--accent)}
-.search-wrap button{background:var(--accent);border:none;border-radius:10px;padding:9px 20px;color:#fff;cursor:pointer;font-size:14px;font-family:'Inter',sans-serif;font-weight:500}
+.search-wrap button{background:var(--accent);border:none;border-radius:10px;padding:9px 20px;color:#fff;cursor:pointer;font-size:14px;font-family:'Inter',sans-serif;font-weight:500;transition:background 0.2s}
 .search-wrap button:hover{background:#cf4f00}
 .tabs{display:flex;gap:6px;margin-left:auto}
 .tab{background:transparent;border:1px solid var(--border);border-radius:8px;padding:7px 16px;color:var(--muted);cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;transition:all 0.2s}
@@ -25,10 +25,11 @@ header{background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1
 main{padding:32px}
 .section-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px;margin-bottom:40px}
-.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s;position:relative}
+.card{background:var(--bg2);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:all 0.2s}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card-img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;background:var(--bg3)}
-.card-score{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.85);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:500;color:#ffd700}
+.card-score{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.8);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:500;color:#ffd700}
+.card-wrap{position:relative}
 .card-info{padding:10px 12px}
 .card-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-sub{font-size:11px;color:var(--muted);margin-top:4px}
@@ -41,28 +42,31 @@ main{padding:32px}
 .back-btn:hover{border-color:var(--accent);color:var(--accent)}
 .player-layout{display:grid;grid-template-columns:1fr 280px;gap:28px}
 @media(max-width:768px){.player-layout{grid-template-columns:1fr}}
-.player-wrap{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9}
+.player-wrap{background:#000;border-radius:12px;overflow:hidden;aspect-ratio:16/9;position:relative}
 .player-wrap iframe{width:100%;height:100%;border:none;display:block}
-.no-ep{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px}
+.player-wrap video{width:100%;height:100%;display:block}
+.no-ep{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:14px;gap:12px}
+.ep-section{margin-top:20px}
+.ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto;padding-right:4px}
+.ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
+.ep-btn:hover{border-color:#555;color:#fff}
+.ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
 .server-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
 .server-label{font-size:12px;color:var(--muted)}
 .server-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
 .server-btn:hover{border-color:#555;color:#fff}
 .server-btn.active{border-color:var(--accent);color:var(--accent)}
-.ep-section{margin-top:20px}
-.ep-label{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:10px}
-.ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;max-height:200px;overflow-y:auto}
-.ep-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.15s}
-.ep-btn:hover{border-color:#555;color:#fff}
-.ep-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
 .sidebar-cover{width:100%;border-radius:12px;aspect-ratio:2/3;object-fit:cover;display:block;margin-bottom:16px}
 .anime-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.3;margin-bottom:6px}
 .anime-score{font-size:13px;color:var(--accent);margin-bottom:10px;font-weight:500}
 .anime-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;max-height:130px;overflow:hidden}
 .genres{display:flex;flex-wrap:wrap;gap:6px}
 .genre-tag{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--muted)}
-.id-badge{margin-top:12px;font-size:11px;color:var(--muted);background:var(--bg3);border-radius:6px;padding:6px 10px}
-.id-badge.found{color:#4caf50;background:#0a1f0a}
+.quality-selector{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.quality-btn{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.quality-btn:hover{border-color:#555;color:#fff}
+.quality-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(232,93,4,0.1)}
 </style>
 </head>
 <body>
@@ -88,14 +92,15 @@ main{padding:32px}
     <div class="player-layout">
       <div>
         <div class="player-wrap" id="playerWrap">
-          <div class="no-ep">Select an episode to start watching</div>
+          <div class="no-ep">▶ Select an episode to start watching</div>
+        </div>
+        <div id="qualitySelector" style="display:none">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Quality:</div>
+          <div class="quality-selector" id="qualityContainer"></div>
         </div>
         <div class="server-row" id="serverRow" style="display:none">
           <span class="server-label">Servers:</span>
-          <button class="server-btn active" onclick="switchServer(0,this)">Server 1</button>
-          <button class="server-btn" onclick="switchServer(1,this)">Server 2</button>
-          <button class="server-btn" onclick="switchServer(2,this)">Server 3</button>
-          <button class="server-btn" onclick="switchServer(3,this)">Server 4</button>
+          <div id="serverContainer"></div>
         </div>
         <div class="ep-section">
           <div class="ep-label">Episodes</div>
@@ -108,56 +113,23 @@ main{padding:32px}
 </main>
 <script>
 const GQL='https://graphql.anilist.co';
-let cur=null,curEp=1,curServer=0;
-
-// MAL ID -> IMDB ID lookup for popular anime
-const MAL_TO_IMDB={
-  20:'tt0409591',    // Naruto
-  1735:'tt0988824',  // Naruto Shippuden
-  16498:'tt2098220', // Attack on Titan
-  11061:'tt1355642', // Hunter x Hunter 2011
-  5114:'tt0796366',  // FMA Brotherhood
-  1:'tt0186216',     // Cowboy Bebop
-  6:'tt0112159',     // Trigun
-  21:'tt0388629',    // One Piece
-  269:'tt0986227',   // Bleach
-  199:'tt0421463',   // Samurai Champloo
-  30276:'tt3398540', // One Punch Man
-  31964:'tt5753054', // My Hero Academia
-  32281:'tt5512164', // Kimi no Na wa
-  38000:'tt9335498', // Demon Slayer
-  40748:'tt11032374',// Jujutsu Kaisen
-  918:'tt0318871',   // Gintama
-  9253:'tt1613702',  // Steins;Gate
-  23273:'tt3398072', // Tokyo Ghoul
-  10087:'tt1980929', // Fate/Zero
-  28977:'tt4644488', // Sword Art Online
-  36098:'tt6328826', // Re:Zero
-  14:'tt0115765',    // Neon Genesis Evangelion
-  2904:'tt1247690',  // Code Geass
-  22319:'tt2948356', // Tokyo Ghoul
-  33352:'tt5491994', // Overlord
-  40591:'tt11032374',// JJK
-  50739:'tt13916716',// Chainsaw Man
-  44511:'tt13622776',// Spy x Family
-  51009:'tt14154242',// Blue Lock
-  49596:'tt14513616',// Shingeki S4
-};
-
-async function gql(query,variables){
-  const r=await fetch(GQL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})});
-  return (await r.json()).data;
-}
+const VIDSRC_API='https://vidsrc.me/api';
+let cur=null,curEp=1,curServer=0,curQuality='auto';
 
 const Q={
   trending:`query{Page(perPage:24){media(sort:TRENDING_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
   popular:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
   upcoming:`query{Page(perPage:24){media(sort:POPULARITY_DESC,type:ANIME,status:NOT_YET_RELEASED,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
   search:`query($s:String){Page(perPage:24){media(search:$s,type:ANIME,isAdult:false){id title{romaji}coverImage{large}episodes status averageScore}}}`,
-  detail:`query($id:Int){Media(id:$id,type:ANIME){id idMal title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false)}}`
+  detail:`query($id:Int){Media(id:$id,type:ANIME){id title{romaji english}coverImage{large extraLarge}episodes status averageScore genres description(asHtml:false) idMal externalLinks{site url}}}`
 };
 
 const labels={trending:'Trending Now',popular:'Most Popular',upcoming:'Coming Soon'};
+
+async function gql(query,variables){
+  const r=await fetch(GQL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})});
+  return (await r.json()).data;
+}
 
 async function loadTab(type,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -181,12 +153,13 @@ async function renderGrid(q,vars){
   grid.innerHTML='<div class="loading"></div>';
   try{
     const data=await gql(q,vars);
+    const list=data.Page.media;
     grid.innerHTML='';
-    data.Page.media.forEach(a=>{
+    list.forEach(a=>{
       const div=document.createElement('div');
       div.className='card';
       const score=a.averageScore?`<div class="card-score">★ ${(a.averageScore/10).toFixed(1)}</div>`:'';
-      div.innerHTML=`${score}<img class="card-img" src="${a.coverImage.large}" loading="lazy"/><div class="card-info"><div class="card-title">${a.title.romaji}</div><div class="card-sub">${a.episodes?a.episodes+' eps':a.status||''}</div></div>`;
+      div.innerHTML=`<div class="card-wrap"><img class="card-img" src="${a.coverImage.large}" loading="lazy"/>${score}</div><div class="card-info"><div class="card-title">${a.title.romaji}</div><div class="card-sub">${a.episodes||'?'} eps</div></div>`;
       div.onclick=()=>openAnime(a.id);
       grid.appendChild(div);
     });
@@ -198,46 +171,26 @@ async function renderGrid(q,vars){
 async function openAnime(id){
   document.getElementById('homePage').style.display='none';
   document.getElementById('playerPage').style.display='block';
-  document.getElementById('playerWrap').innerHTML='<div class="no-ep">Select an episode</div>';
+  document.getElementById('playerWrap').innerHTML='<div class="no-ep">▶ Select an episode</div>';
   document.getElementById('epGrid').innerHTML='';
   document.getElementById('serverRow').style.display='none';
+  document.getElementById('qualitySelector').style.display='none';
   document.getElementById('animeSidebar').innerHTML='<div class="loading"></div>';
   try{
     const data=await gql(Q.detail,{id});
     const a=data.Media;
-    cur={...a};
-    curServer=0; curEp=1;
-
-    // Check hardcoded lookup first
-    let imdbId=a.idMal?MAL_TO_IMDB[a.idMal]:null;
-
-    // If not in lookup, try Jikan API
-    if(!imdbId && a.idMal){
-      try{
-        const jr=await fetch(`https://api.jikan.moe/v4/anime/${a.idMal}/external`);
-        const jd=await jr.json();
-        const imdbEntry=(jd.data||[]).find(e=>e.url&&e.url.includes('imdb.com'));
-        if(imdbEntry){const m=imdbEntry.url.match(/tt\d+/);if(m)imdbId=m[0];}
-      }catch{}
-    }
-
-    cur.imdbId=imdbId;
-
+    cur=a;
+    curServer=0;
+    curQuality='auto';
     const desc=a.description?a.description.replace(/<[^>]*>/g,'').slice(0,280)+'…':'No description.';
     const genres=(a.genres||[]).slice(0,6).map(g=>`<span class="genre-tag">${g}</span>`).join('');
     const score=a.averageScore?`★ ${(a.averageScore/10).toFixed(1)}/10 · `:'';
-    const idBadge=imdbId
-      ?`<div class="id-badge found">✓ IMDB: ${imdbId}</div>`
-      :`<div class="id-badge">Using MAL ID: ${a.idMal||a.id} as fallback</div>`;
-
     document.getElementById('animeSidebar').innerHTML=`
       <img class="sidebar-cover" src="${a.coverImage.extraLarge||a.coverImage.large}"/>
       <div class="anime-title">${a.title.english||a.title.romaji}</div>
       <div class="anime-score">${score}${a.status||''}</div>
       <div class="anime-desc">${desc}</div>
-      <div class="genres">${genres}</div>
-      ${idBadge}`;
-
+      <div class="genres">${genres}</div>`;
     const eps=a.episodes||1;
     const epGrid=document.getElementById('epGrid');
     for(let i=1;i<=Math.min(eps,300);i++){
@@ -252,34 +205,103 @@ async function openAnime(id){
   }
 }
 
-function buildUrl(ep){
-  const imdb=cur.imdbId;
-  const mal=cur.idMal;
-  const domains=['https://vidsrc-embed.ru','https://vsembed.ru','https://vsembed.su','https://vidsrc-embed.su'];
-  const base=domains[curServer]||domains[0];
-  if(imdb) return `${base}/embed/tv?imdb=${imdb}&season=1&episode=${ep}&autoplay=1`;
-  if(mal)  return `${base}/embed/tv?tmdb=${mal}&season=1&episode=${ep}&autoplay=1`;
-  return `${base}/embed/tv?tmdb=${cur.id}&season=1&episode=${ep}&autoplay=1`;
+async function getSourcesFromVidsrc(type,id,season,episode){
+  try{
+    const url=`${VIDSRC_API}/${type}/${id}/sources?season=${season}&episode=${episode}`;
+    const r=await fetch(url);
+    if(!r.ok)return null;
+    const data=await r.json();
+    return data.sources||data.links||[];
+  }catch(e){
+    console.error('VidSrc API error:',e);
+    return [];
+  }
 }
 
-function playEp(ep,btn){
+async function getServers(type,id,season,episode){
+  try{
+    const url=`${VIDSRC_API}/${type}/${id}/latest`;
+    const r=await fetch(url);
+    if(!r.ok)return [];
+    const data=await r.json();
+    return data.servers||[];
+  }catch(e){
+    console.error('Error fetching servers:',e);
+    return [];
+  }
+}
+
+async function playEp(ep,btn){
   document.querySelectorAll('.ep-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   curEp=ep;
-  loadPlayer();
+  document.getElementById('playerWrap').innerHTML='<div class="loading"></div>';
+  await loadPlayer();
   document.getElementById('serverRow').style.display='flex';
+  document.getElementById('qualitySelector').style.display='block';
 }
 
-function loadPlayer(){
-  const url=buildUrl(curEp);
-  document.getElementById('playerWrap').innerHTML=`<iframe src="${url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin"></iframe>`;
+async function loadPlayer(){
+  if(!cur)return;
+  try{
+    const sources=await getSourcesFromVidsrc('tv',cur.idMal||cur.id,1,curEp);
+    if(!sources||sources.length===0){
+      document.getElementById('playerWrap').innerHTML='<div class="no-ep">No sources available for this episode.</div>';
+      return;
+    }
+    const source=sources[0];
+    if(source.type==='iframe'){
+      document.getElementById('playerWrap').innerHTML=`<iframe src="${source.url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin" scrolling="no"></iframe>`;
+    }else if(source.url){
+      document.getElementById('playerWrap').innerHTML=`<video controls style="width:100%;height:100%;object-fit:contain;"><source src="${source.url}" type="video/mp4"></video>`;
+    }
+    renderServersAndQualities(sources);
+  }catch(e){
+    document.getElementById('playerWrap').innerHTML='<div class="no-ep">Error loading player. Try another source.</div>';
+  }
 }
 
-function switchServer(idx,btn){
+function renderServersAndQualities(sources){
+  const serverContainer=document.getElementById('serverContainer');
+  serverContainer.innerHTML='';
+  const qualities=new Set();
+  sources.forEach(s=>{
+    if(s.quality)qualities.add(s.quality);
+  });
+  sources.forEach((s,idx)=>{
+    const btn=document.createElement('button');
+    btn.className='server-btn';
+    if(idx===0)btn.classList.add('active');
+    btn.textContent=s.server||`Server ${idx+1}`;
+    btn.onclick=()=>switchServer(s,btn);
+    serverContainer.appendChild(btn);
+  });
+  const qualityContainer=document.getElementById('qualityContainer');
+  qualityContainer.innerHTML='';
+  qualities.forEach(q=>{
+    const btn=document.createElement('button');
+    btn.className='quality-btn';
+    if(q==='auto')btn.classList.add('active');
+    btn.textContent=q;
+    btn.onclick=()=>switchQuality(q,btn);
+    qualityContainer.appendChild(btn);
+  });
+}
+
+function switchServer(source,btn){
   document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  curServer=idx;
-  if(cur&&curEp)loadPlayer();
+  if(source.type==='iframe'){
+    document.getElementById('playerWrap').innerHTML=`<iframe src="${source.url}" allowfullscreen allow="autoplay;fullscreen;encrypted-media;picture-in-picture" referrerpolicy="origin" scrolling="no"></iframe>`;
+  }else if(source.url){
+    document.getElementById('playerWrap').innerHTML=`<video controls style="width:100%;height:100%;object-fit:contain;"><source src="${source.url}" type="video/mp4"></video>`;
+  }
+}
+
+function switchQuality(quality,btn){
+  document.querySelectorAll('.quality-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  curQuality=quality;
 }
 
 function goHome(){
